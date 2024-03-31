@@ -6,10 +6,10 @@ from time import sleep
 #set paths
 chromedriver_path = 'C:/chromedriver.exe'
 webdriver = webdriver.Chrome()
-webdriver.get('https://pontonet.assistonline.com.br/')
+webdriver.get('')
 
-user01 = ('kinsley.amadi')
-passw01 = ('Assist939511960')
+user01 = ('')
+passw01 = ('')
 
 act1 = webdriver.find_element(By.NAME, 'usuario_login')
 act1.send_keys(user01)
