@@ -5,6 +5,25 @@ This project uses Python to automate the filling of web forms. It uses libraries
 ## Required Libraries
 
 Make sure to have the following libraries installed:
+    
+    python
+    pip install pandas selenium
+    pip install webdriver
+    pip install getpass
+    pip install glob
+    pip install sys
+    pip install os
 
-```python
-pip install pandas selenium
+## Top of Code
+
+First, we import all the necessary libraries for the script:
+
+    import pandas as pd
+    from selenium import webdriver
+    from selenium.webdriver.common.by import By
+    import getpass
+    import time
+    import glob
+    import sys
+    import os
+## hello
