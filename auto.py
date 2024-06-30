@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 import getpass
 import time
 import glob
+import sys
 import os
 
 def recize_window(linhas, colunas):
@@ -20,15 +21,11 @@ possibles_xlsx = list_possibles()
 
 if not possibles_xlsx:
     os.system('cls')
-    print("Nenhum arquivo .xlsx encontrado")
+    print("Nenhum arquivo .xlsx encontrado, encerrando o executável")
     time.sleep(1)
-    print("encerrando o executável")
-    time.sleep(1)
-    print("Posicione um arquivo .xlsx")
-    time.sleep(1)
-    print("NO MESMO DIRETÓRIO que o executável")
+    print("Favor posicionar um arquivo .xlsx NO MESMO DIRETÓRIO que o executável!")
     time.sleep(5)
-    
+    sys.exit()
 else:
     os.system('cls')
     print("Arquivos .xlsx encontrados no diretório atual:")
