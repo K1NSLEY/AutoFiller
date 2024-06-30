@@ -7,7 +7,8 @@ def mostrar_alternativa():
 
 # Criar janela principal
 root = tk.Tk()
-root.title("Campo de Texto com Alternativas")
+root.title("Campo de Texto com Alternativaa")
+
 
 # Criar combobox com alternativas
 alternativas = ["Opção 1", "Opção 2", "Opção 3", "Opção 4", "Opção 5"]
