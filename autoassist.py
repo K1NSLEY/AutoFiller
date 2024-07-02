@@ -41,18 +41,7 @@ df = pd.read_excel(chosen)
 print("A lista a ser preenchida na Web é a segunte: ")
 time.sleep(2)
 for index, row in df.iterrows():
-    print(
-        str(row["NOME"]) + " " +
-        str(row["NOMEDOMEIO"]) + " " +
-        str(row["ULTIMONOME"]) + " " +
-        str(row["NUMERO"]) + " " +
-        str(row["RUA"]) + " " +
-        str(row["RUA2"]) + " " +
-        str(row["CIDADE"]) + " " +
-        str(row["ESTADO"]) + " " +
-        str(row["ZIP"]) + " " +
-        str(row["PAIS"])
-    )
+    print(" ")
     time.sleep(0.1)
 time.sleep (0.5)
 for i in range(3):
@@ -108,10 +97,7 @@ for index, row in df.iterrows():
     act5.send_keys(row["DEFEITO"])
 
     act6 = chrome.find_element(By.XPATH,'//*[@id="td_solucao"]/select')
-    act6.send_keys(row["DEFEITO2"])
-
-    act6 = chrome.find_element(By.XPATH,'//*[@id="td_solucao"]/select')
-    act6.send_keys(row["SOLUTION"])
+    act6.send_keys(row["SERVICE"])
 
     act7 = chrome.find_element(By.XPATH, '//*[@id="AVAL"]/table/tbody/tr/td/table[3]/tbody/tr[1]/td/table[1]/tbody/tr[4]/td[1]/input')
     act7.send_keys(row["CODIGO"])
@@ -124,6 +110,11 @@ for index, row in df.iterrows():
 
     act10 = chrome.find_element(By.XPATH,'//*[@id="cont_nfEntrada"]/table[1]/tbody/tr/td[2]').getText()
     input(act10)
+    act11 = chrome.find_element(By.XPATH,'//*[@id="cont_nfEntrada"]/table[2]/tbody/tr[2]/td/table[1]/tbody/tr[2]/td/input')
+    act11.send_keys(act10)
+
+    act12 = chrome.find_element(By.XPATH,'//*[@id="cont_nfEntrada"]/table[2]/tbody/tr[2]/td/table[3]/tbody/tr/td/input')
+    act12.click()
     
 
 
@@ -131,9 +122,7 @@ for index, row in df.iterrows():
         
 
     time.sleep(1)
-    restart1 = chrome.find_element(By. XPATH, '//*[@id="navbarSupportedContent"]/ul/li[4]/a')
-    restart2 = chrome.find_element(By. XPATH, '//*[@id="navbarSupportedContent"]/ul/li[4]/ul/li/a')
+    restart1 = chrome.find_element(By. XPATH, '//*[@id="pesq_os"]')
     restart1.click()
-    restart2.click()
     time.sleep(1)
 chrome.quit()
