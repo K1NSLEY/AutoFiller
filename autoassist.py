@@ -90,8 +90,6 @@ for index, row in df.iterrows():
     submit2.click()
     act2 = chrome.find_element(By.XPATH, '//*[@id="rodaScript"]/table/tbody/tr[3]/td[4]/a/img')
     act2.click()
-    print("Preenchendo: " + str(index + 1) + "° valor da tabela")
-    print(str(index + 1)+ "° valor" + " Preenchido!")
     print(" ")
 
     act3 = chrome.find_element(By.XPATH, '//*[@id="nomeTecnico"]')
