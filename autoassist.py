@@ -41,7 +41,14 @@ df = pd.read_excel(chosen)
 print("A lista a ser preenchida na Web é a segunte: ")
 time.sleep(2)
 for index, row in df.iterrows():
-    print(" ")
+    print(
+        str(row["TECNICO"]) + " " +
+        str(row["DESCRIPT"]) + " " +
+        str(row["DEFEITO"]) + " " +
+        str(row["SERVICE"]) + " " +
+        str(row["CODIGO"]) + " " +
+        str(row["OS11"]) + " "
+    )
     time.sleep(0.1)
 time.sleep (0.5)
 for i in range(3):
