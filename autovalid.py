@@ -41,16 +41,7 @@ else:
 df = pd.read_excel(chosen)
 print("A lista a ser preenchida na Web é a segunte: ")
 time.sleep(2)
-for index, row in df.iterrows():
-    print(
-        str(row["TECNICO"]) + " " +
-        str(row["DESCRIPT"]) + " " +
-        str(row["DEFEITO"]) + " " +
-        str(row["SERVICE"]) + " " +
-        str(row["CODIGO"]) + " " +
-        str(row["OS11"]) + " "
-    )
-    time.sleep(0.1)
+
 time.sleep (0.5)
 for i in range(3):
     os.system('cls')
@@ -91,19 +82,15 @@ for index, row in df.iterrows():
 
     act1 = chrome.find_element(By.XPATH, '//*[@id="os"]')
     act1.send_keys(row["OS"])
-    submit2 = chrome.find_element(By.XPATH, '//*[@id="formPesquisaOS"]/table/tbody/tr[14]/td/img')
+    submit2 = chrome.find_element(By.XPATH, '/html/body/table[2]/tbody/tr/td[2]/table/tbody/tr[2]/td/form/table/tbody/tr[14]/td/img')
     submit2.click()
-    act2 = chrome.find_element(By.XPATH, '//*[@id="rodaScript"]/table/tbody/tr[3]/td[4]/a/img')
+    act2 = chrome.find_element(By.CSS_SELECTOR, '#rodaScript > table > tbody > tr.link1 > td:nth-child(4) > a > img')
     act2.click()
     print(" ")
 
-    act3 = chrome.find_element(By.XPATH, '//*[@id="rodaScript"]/table/tbody/tr[3]/td[4]/a/img')
-    act3.click()
-
-    act4 = chrome.find_element(By.XPATH, '//*[@id="btn_confirmar"]')
+    act4 = chrome.find_element(By.XPATH, '/html/body/table[2]/tbody/tr/td[2]/form/table/tbody/tr/td/table[3]/tbody/tr/td[2]/input')
     act4.click()
 
-    chrome.implicitly_wait(10)
     alert = chrome.switch_to.alert
     alert.accept()
 
