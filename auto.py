@@ -2,16 +2,19 @@
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from tkinter import filedialog
+import tkinter as tk
 import getpass
 import time
 import glob
 import sys
 import os
 
+root = tk.Tk()
+root.withdraw()
+
 def recize_window(linhas, colunas):
     os.system(f'mode con: cols={colunas} lines={linhas}')
-
-recize_window(15, 120)
 
 def list_possibles():
     current_directory = os.getcwd()
@@ -20,22 +23,46 @@ def list_possibles():
 possibles_xlsx = list_possibles()
 
 if not possibles_xlsx:
-    os.system('cls')
-    print("Nenhum arquivo .xlsx encontrado, encerrando o executável")
+    print("Nenhum arquivo .xlsx encontrado, encerrando o executável.")
     time.sleep(1)
-    print("Favor posicionar um arquivo .xlsx NO MESMO DIRETÓRIO que o executável!")
-    time.sleep(5)
-    sys.exit()
+    print("Nenhum arquivo encontrado no diretório, favor escolher outro.")
+    arqv = filedialog.askopenfilename()
+    if not arqv:
+        print("Desarmado. Programa sendo encerrado")
+        exit()
 else:
     os.system('cls')
     print("Arquivos .xlsx encontrados no diretório atual:")
+    print("Digite o reespectivo numero dele ou 0 para outra selecionar em outro diretório")
     for idx, arquivo in enumerate(possibles_xlsx, start=1):
         print(f"{idx}. {os.path.basename(arquivo)}")
 
     choice = int(input("Escolha o número do arquivo que deseja usar: ")) - 1
+    arqv = choice
     chosen = possibles_xlsx[choice]
 
     print(f"Você escolheu: {os.path.basename(chosen)}")
+
+
+def sel_site():
+    site =input(" ")    
+    if site == "1":
+        site = "https://fill.dev/form/login-simple"
+        print("Você escolheu o Teste WebCrowler")
+    elif site == "2":
+        site = "https://pontonet.assistonline.com.br/"
+        print("Você escolheu o AssitsPontonet")
+
+arqv_sel = filedialog.askopenfilename()
+
+# Exibe o caminho do arquivo selecionado
+print(f"Arquivo selecionado: {chosen}")
+
+
+
+
+
+
 
 df = pd.read_excel(chosen)
 print("A lista a ser preenchida na Web é a segunte: ")
@@ -54,7 +81,6 @@ for index, row in df.iterrows():
         str(row["PAIS"])
     )
     time.sleep(0.1)
-time.sleep (0.5)
 for i in range(3):
     os.system('cls')
     print("Agora, faça login através desse terminal CMD")
@@ -62,6 +88,21 @@ for i in range(3):
     os.system('cls')
     time.sleep(0.5)
     i + 1
+
+os.system('cls')
+print("Qual o site deseja deseja utilizar? ")
+print("Digite o numero de um dos sites abaixo ou cole a URL!")
+print("1 - Teste WebCrowler")
+print("2 - AssistPontonet")
+site =input(" ")
+if site == "1":
+    site = "https://fill.dev/form/login-simple"
+    print("Você escolheu o Teste WebCrowler")
+elif site == "2":
+    site = "https://pontonet.assistonline.com.br/"
+    print("Você escolheu o AssitsPontonet")
+
+
 
 assi_log = input("Insira seu nome de usuário no ASSIST: ")
 os.system('cls')
@@ -72,7 +113,7 @@ print("Navegador Web aberto em 3 segundos!")
 
 
 chrome = webdriver.Chrome()
-chrome.get("https://fill.dev/form/login-simple")
+chrome.get(site)
 time.sleep(2)
 login = chrome.find_element(By. XPATH, '//*[@id="username"]')
 password = chrome.find_element(By. XPATH, '//*[@id="password"]')
