@@ -1,4 +1,3 @@
-#libs
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -20,32 +19,32 @@ def list_possibles():
     current_directory = os.getcwd()
     possibles_xlsx = glob.glob(os.path.join(current_directory, '*.xlsx'))
     return possibles_xlsx
+
 possibles_xlsx = list_possibles()
 
 if not possibles_xlsx:
     print("Nenhum arquivo .xlsx encontrado, encerrando o executável.")
     time.sleep(1)
     print("Nenhum arquivo encontrado no diretório, favor escolher outro.")
-    arqv = filedialog.askopenfilename()
-    if not arqv:
-        print("Desarmado. Programa sendo encerrado")
-        exit()
 else:
     os.system('cls')
     print("Arquivos .xlsx encontrados no diretório atual:")
-    print("Digite o reespectivo numero dele ou 0 para outra selecionar em outro diretório")
+    print("Digite o respectivo número dele ou 0 para selecionar em outro diretório.")
     for idx, arquivo in enumerate(possibles_xlsx, start=1):
         print(f"{idx}. {os.path.basename(arquivo)}")
 
     choice = int(input("Escolha o número do arquivo que deseja usar: ")) - 1
-    arqv = choice
-    chosen = possibles_xlsx[choice]
+    if choice == -1:
+        arqv_sel = filedialog.askopenfilename(filetypes=[("Arquivos Excel", "*.xlsx")])
+        chosen = arqv_sel
+    else:
+        chosen = possibles_xlsx[choice]
 
     print(f"Você escolheu: {os.path.basename(chosen)}")
 
 
 def sel_site():
-    site =input(" ")    
+    site = input(" ")    
     if site == "1":
         site = "https://fill.dev/form/login-simple"
         print("Você escolheu o Teste WebCrowler")
@@ -53,19 +52,9 @@ def sel_site():
         site = "https://pontonet.assistonline.com.br/"
         print("Você escolheu o AssitsPontonet")
 
-arqv_sel = filedialog.askopenfilename()
-
-# Exibe o caminho do arquivo selecionado
-print(f"Arquivo selecionado: {chosen}")
-
-
-
-
-
-
-
+# Aqui, 'chosen' agora contém o caminho correto do arquivo
 df = pd.read_excel(chosen)
-print("A lista a ser preenchida na Web é a segunte: ")
+print("A lista a ser preenchida na Web é a seguinte: ")
 time.sleep(2)
 for index, row in df.iterrows():
     print(
@@ -90,19 +79,17 @@ for i in range(3):
     i + 1
 
 os.system('cls')
-print("Qual o site deseja deseja utilizar? ")
-print("Digite o numero de um dos sites abaixo ou cole a URL!")
+print("Qual o site deseja utilizar? ")
+print("Digite o número de um dos sites abaixo ou cole a URL!")
 print("1 - Teste WebCrowler")
 print("2 - AssistPontonet")
-site =input(" ")
+site = input(" ")
 if site == "1":
     site = "https://fill.dev/form/login-simple"
     print("Você escolheu o Teste WebCrowler")
 elif site == "2":
     site = "https://pontonet.assistonline.com.br/"
     print("Você escolheu o AssitsPontonet")
-
-
 
 assi_log = input("Insira seu nome de usuário no ASSIST: ")
 os.system('cls')
@@ -111,21 +98,20 @@ assi_psw = getpass.getpass("Insira sua senha de acesso ASSIST: ")
 os.system('cls')
 print("Navegador Web aberto em 3 segundos!")
 
-
 chrome = webdriver.Chrome()
 chrome.get(site)
 time.sleep(2)
-login = chrome.find_element(By. XPATH, '//*[@id="username"]')
-password = chrome.find_element(By. XPATH, '//*[@id="password"]')
-oklogin = chrome.find_element(By. XPATH, '//*[@id="app"]/main/div/div/div/div/div[2]/form/div[3]/div/button')
+login = chrome.find_element(By.XPATH, '//*[@id="username"]')
+password = chrome.find_element(By.XPATH, '//*[@id="password"]')
+oklogin = chrome.find_element(By.XPATH, '//*[@id="app"]/main/div/div/div/div/div[2]/form/div[3]/div/button')
 login.send_keys(assi_log)
 password.send_keys(assi_psw)
 oklogin.click()
 time.sleep(2)
 
-inden = chrome.find_element(By. XPATH, '/html/body/div/nav/div/div/ul/li[4]/a')
+inden = chrome.find_element(By.XPATH, '/html/body/div/nav/div/div/ul/li[4]/a')
 inden.click()
-inden2 = chrome.find_element(By. XPATH, '/html/body/div/nav/div/div/ul/li[4]/ul/li/a')
+inden2 = chrome.find_element(By.XPATH, '/html/body/div/nav/div/div/ul/li[4]/ul/li/a')
 inden2.click()
 time.sleep(1)
 os.system('cls')
@@ -153,15 +139,13 @@ for index, row in df.iterrows():
     act8.send_keys(row["ESTADO"])
     act9.send_keys(row["ZIP"])
     act10.send_keys(row["PAIS"])
-    print(str(index + 1)+ "° valor" + " Preenchido!")
-    print(" ")
-
-
+    print(str(index + 1) + "° valor" + " Preenchido!")
     submit2.click()
     time.sleep(1)
-    restart1 = chrome.find_element(By. XPATH, '//*[@id="navbarSupportedContent"]/ul/li[4]/a')
-    restart2 = chrome.find_element(By. XPATH, '//*[@id="navbarSupportedContent"]/ul/li[4]/ul/li/a')
+    restart1 = chrome.find_element(By.XPATH, '//*[@id="navbarSupportedContent"]/ul/li[4]/a')
+    restart2 = chrome.find_element(By.XPATH, '//*[@id="navbarSupportedContent"]/ul/li[4]/ul/li/a')
     restart1.click()
     restart2.click()
     time.sleep(1)
+
 chrome.quit()
