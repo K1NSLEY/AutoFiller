@@ -1,6 +1,7 @@
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+import paho.mqtt.client as mqtt
 from tkinter import filedialog
 import tkinter as tk
 import getpass
@@ -12,8 +13,10 @@ import os
 root = tk.Tk()
 root.withdraw()
 
-def recize_window(linhas, colunas):
-    os.system(f'mode con: cols={colunas} lines={linhas}')
+def Auth():
+    
+
+    
 
 def list_possibles():
     current_directory = os.getcwd()
@@ -44,15 +47,20 @@ else:
 
 
 def sel_site():
-    site = input(" ")    
-    if site == "1":
+    site == " "
+    os.system('cls')
+    print("Qual o site deseja utilizar? ")
+    print("Digite o número de um dos sites abaixo ou cole a URL!")
+    print("1 - Teste WebCrowler")
+    print("2 - AssistPontonet")
+    web = input(" ")    
+    if web == "1":
         site = "https://fill.dev/form/login-simple"
         print("Você escolheu o Teste WebCrowler")
-    elif site == "2":
+    elif web == "2":
         site = "https://pontonet.assistonline.com.br/"
         print("Você escolheu o AssitsPontonet")
 
-# Aqui, 'chosen' agora contém o caminho correto do arquivo
 df = pd.read_excel(chosen)
 print("A lista a ser preenchida na Web é a seguinte: ")
 time.sleep(2)
@@ -70,33 +78,24 @@ for index, row in df.iterrows():
         str(row["PAIS"])
     )
     time.sleep(0.1)
-for i in range(3):
-    os.system('cls')
-    print("Agora, faça login através desse terminal CMD")
-    time.sleep(0.5)
-    os.system('cls')
-    time.sleep(0.5)
-    i + 1
 
-os.system('cls')
-print("Qual o site deseja utilizar? ")
-print("Digite o número de um dos sites abaixo ou cole a URL!")
-print("1 - Teste WebCrowler")
-print("2 - AssistPontonet")
-site = input(" ")
-if site == "1":
-    site = "https://fill.dev/form/login-simple"
-    print("Você escolheu o Teste WebCrowler")
-elif site == "2":
-    site = "https://pontonet.assistonline.com.br/"
-    print("Você escolheu o AssitsPontonet")
+def login():
+    for i in range(3):
+        os.system('cls')
+        print("Agora, faça login através desse terminal CMD")
+        time.sleep(0.5)
+        os.system('cls')
+        time.sleep(0.5)
+        i + 1
 
-assi_log = input("Insira seu nome de usuário no ASSIST: ")
-os.system('cls')
-time.sleep(1)
-assi_psw = getpass.getpass("Insira sua senha de acesso ASSIST: ")
-os.system('cls')
-print("Navegador Web aberto em 3 segundos!")
+    os.system('cls')
+    assi_log = input("Insira seu nome de usuário no ASSIST: ")
+    os.system('cls') 
+    time.sleep(1)
+    assi_psw = getpass.getpass("Insira sua senha de acesso ASSIST: ")
+    os.system('cls')
+    print("Navegador Web aberto em 3 segundos!")
+login()
 
 chrome = webdriver.Chrome()
 chrome.get(site)
